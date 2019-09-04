@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Search from "./components/Search";
 import Playlist from "./components/Playlist";
 // import Feed from "./components/Search";
+import NotFound from "./components/NotFound";
 
 
 /** setup route */
@@ -20,7 +21,8 @@ export default new Router({
         {path:"/featured", component:Home},
       {path:"/search", component:Search },
       {path:"/yourplaylist", component:Playlist},
-        // {path:"/feed/:id", component:Feed,  name: 'Feed'},
+      // {path:"/feed/:id", component:Feed,  name: 'Feed'},
+      {path:"/**", component:NotFound},
         
     ]
 })

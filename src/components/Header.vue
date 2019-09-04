@@ -18,8 +18,10 @@
                      <router-link to="/search">search</router-link>
                        
                     </li>       
-                    <li>
-                     <router-link to="/yourplaylist">create playlist</router-link>
+                    <li v-if="getFavoriteCount>0" class="badge">
+                        <span>  {{getFavoriteCount}}</span>
+                      
+                     <router-link to="/yourplaylist">selection</router-link>
                 
                     </li>
                     <!-- <li role="separator" class="divider"></li>
@@ -39,8 +41,15 @@
 </template>
 
 <script>
-export default {
 
+import {mapGetters} from "vuex";
+ 
+export default {
+    name:"Header",
+     computed:{
+    ...mapGetters(["getFavoriteCount"]),
+   
+  },
 }
 </script>
 
@@ -103,6 +112,16 @@ a{
     color:#fff;
 }
 
+.badge span{
+        position: absolute;
+    right: 0;
+    top: -10px;
+    display: block;
+    border-radius: 50%;
+    border: 1px solid red;
+    width: 25px;
+    height: 25px;
+}
 
  
 </style>

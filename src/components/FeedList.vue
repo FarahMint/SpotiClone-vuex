@@ -22,7 +22,7 @@ import FeedItem from "./FeedItem";
 export default {
       name:"FeedsList",
     
-components:{ "feed-item": FeedItem },  
+components:{ "feed-item": FeedItem   },  
   computed:{
     ...mapGetters(["allFeeds"]),
   },
@@ -46,7 +46,8 @@ components:{ "feed-item": FeedItem },
   }
 
   .list__display{
-         display:grid;
+  display:grid;
   grid-template-columns:  repeat(4, 1fr);
+  grid-gap: 1rem;
   }
 </style>

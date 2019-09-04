@@ -1,30 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import {formatAPI } from "./helper"
+
 
 const baseURL =`https://itunes.apple.com/us/rss/topalbums/limit=100/json`;
-
-//HELPER FUNCTION  -- DESTRUCTURE API DATA 
-function formatAPI(data){
-     
-  // 1- destruture obj we need
-  const {"im:id":id} = data.id.attributes;
-  const {"im:artist":{label:artist}} = data;
-   
-  const {label} = data.category.attributes;
-  const {label: rights}= data.rights; 
-  const {"im:name" :{label:title}}= data;  
-  const {"im:price" :{label:price}}= data;       
-  const {"im:releaseDate" :{attributes:{label: dateRelease}}}= data;       
-  const {"im:image" : [index]} = data;    
-  const {href}= data.link.attributes;   
-  // 2- change the size of the img because are too small
- const image= index.label.replace(/55x55bb.png/gi, '170x170bb.png');
-
-// 3- return  new obj - with field we need
-return {id, label, artist, title, price, image ,href, rights, dateRelease};
-}//end formatAPI
-
 
 
 Vue.use(Vuex)
@@ -36,6 +16,11 @@ export default new Vuex.Store({
     course: {},
     searchWord: null,
     filteredFeeds: null,
+    favoriteFeeds:[],
+    favoriteCount:0,
+  
+    isFeedsLoading: false,
+    appError: null,
   },
 
   //// We need these to be able to access
@@ -44,7 +29,12 @@ export default new Vuex.Store({
   allFeeds: (state) => state.feeds,
   getCourse: (state) => state.course,
   getSearchWord: (state) => state.searchWord,
-  getFilteredFeed: (state) => state.filteredFeeds
+  getFilteredFeed: (state) => state.filteredFeeds,
+  getFavoriteFeed: (state) => state.favoriteFeeds,
+  getFavoriteCount: (state) => state.favoriteFeeds.length,
+  
+  isFeedsLoading: (state) =>  state.isFeedsLoading,
+
  },
   /** mutations : responsible of modifying the state - ! no async call 
    *  We use these to update the values of the store.
@@ -65,18 +55,62 @@ export default new Vuex.Store({
           )//end return
         })//end filter
       }//else
-    }//end FILTERED
+    },//end FILTERED
+
+    // FAVORITE_FEEDS(state, payload) {
+    FAVORITE_FEEDS(state, item) {
+      //1- checking if the  element is included in state.favoriteFeeds
+     if(!state.favoriteFeeds.includes(item)) {
+      //2- adding the element only if it's not already in the array.
+      state.favoriteFeeds.push(item);
+        
+      
+       }
+    },//end FAVORITE
+
+    REMOVE_FROM_FAVORITE(state, payload) {
+      //1- find the index of the payload item inside the state.favoriteFeeds array 
+      //2- remove the item starting from this index (will remove only the payload item)
+      state.favoriteFeeds.splice(state.favoriteFeeds.indexOf(payload), 1);
+     
   },
+ 
+    IS_FEEDS_LOADING: (state, action) => {
+      state.isFeedsLoading = action
+    },
+    ERROR: (state, message) => {
+      state.appError = message
+    }
+  },
+
   actions: {
    async getFeeds({commit}){
-      let response= await fetch(baseURL);
-      let {feed} = await response.json();
-      let feedList = feed.entry.map(item => formatAPI(item));
-        commit("FETCH_DATA", feedList)
+     commit("IS_FEEDS_LOADING", true)
+     try{
+       let response= await fetch(baseURL);
+       let {feed} = await response.json();
+       let feedList = feed.entry.map(item => formatAPI(item));
+
+       commit("IS_FEEDS_LOADING", false);
+      commit("FETCH_DATA", feedList);
+         
+        }catch(err){
+          commit("IS_FEEDS_LOADING", false);
+          commit("ERROR", err);
+        }
   },
-  FILTERED_FEEDS ({ commit }, word) {
+  FILTERED_FEEDS({ commit }, word) {
     commit('FILTERED_FEEDS', word)
-  }
+  },
+
+  FAVORITE_FEEDS({ commit }, payload) {
+   
+    commit('FAVORITE_FEEDS', payload);
+
+  },
+  REMOVE_FROM_FAVORITE({ commit }, payload) {
+    commit("REMOVE_FROM_FAVORITE", payload);
+ },
  
 }
 });

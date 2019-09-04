@@ -2,11 +2,26 @@
   <article> 
     
     <div>
+      <div class="img__container" 
+      
+            @mouseover="hover = true"
+      @mouseleave="hover = false">
         <img 
         v-bind:src="feed.image"
         v-bind:alt="feed.title">
-      <div>
-        <p>{{ feed.artist }}</p>
+
+          <transition name="fade">
+    <p v-if="hover">{{ feed.title }}</p>
+  </transition>
+
+      </div>
+      <div class="meta">
+        <p>{{ feed.artist }}  </p>
+       <span>
+ 
+         <font-awesome-icon 
+       icon="heart" @click="addFav(feed)"/>
+       </span>
 
       </div>
     </div>
@@ -14,38 +29,73 @@
 </template>
 
 <script>
+
+import { mapMutations} from "vuex";
+
 export default {
     name:"feed-item",
+     data() {
+       return{
+         hover: false,
+       }
+  },//data
       /** props from parent FeedsList  */
     props:{
         feed:{
             type:Object,
             required:true,
         }
-    },
+    },//props
+  
      methods:{
          /** go to details page of item targeted */
- 
-    },//methods 
+  ...mapMutations(["FAVORITE_FEEDS"]),
+   addFav(item) {
+   this.FAVORITE_FEEDS(item);
+    
+    }, 
+  } //methods
 }
 </script>
  
 <style scoped>
- .card {
-  background-color: transparent;
-  border: none;
-  border-radius: 0.25rem;
+
+
+.img__container {
+  position: relative;
+}
+.img__container img {
+ width: 100%;
+  height:100%;
+  display: block;
+  object-fit: cover;
+  transition:  all 0.3s linear;
+}
+
+.img__container p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.img__container:hover {
   cursor:pointer;
-  text-align: center;
- }/**end card*/
+  background: rgba(0, 0, 0, 0.8);
+}
 
-   .card-body {
-    padding: 0;
-    }
+.img__container:hover img {
+  opacity: 0.3;
+}
 
-    .col-lg-3, .col-md-4 {
-      margin-bottom: 1rem!important;
-    }
+.meta{
+      display: flex;
+    justify-content: space-evenly;
+}
+.meta span{
+cursor: pointer;
+}
 
     h3, p{
       font-size: 1rem;
@@ -55,7 +105,12 @@ export default {
       text-transform: lowercase;
     }
 
-
+    .fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>
 
  
