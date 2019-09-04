@@ -18,8 +18,8 @@
                      <router-link to="/search">search</router-link>
                        
                     </li>       
-                    <li v-if="getFavoriteCount>0" class="badge">
-                        <span>  {{getFavoriteCount}}</span>
+                    <li class="badge">
+                        <span  v-if="getFavoriteCount>0">  {{getFavoriteCount}}</span>
                       
                      <router-link to="/yourplaylist">selection</router-link>
                 

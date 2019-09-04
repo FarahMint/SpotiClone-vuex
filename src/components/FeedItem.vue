@@ -3,16 +3,15 @@
     
     <div>
       <div class="img__container" 
-      
-            @mouseover="hover = true"
+      @mouseover="hover = true"
       @mouseleave="hover = false">
         <img 
         v-bind:src="feed.image"
         v-bind:alt="feed.title">
 
-          <transition name="fade">
-    <p v-if="hover">{{ feed.title }}</p>
-  </transition>
+        <transition name="fade">
+          <p v-if="hover">{{ feed.title }}</p>
+        </transition>
 
       </div>
       <div class="meta">
@@ -20,7 +19,8 @@
        <span>
  
          <font-awesome-icon 
-       icon="heart" @click="addFav(feed)"/>
+       icon="heart" @click="addFav(feed)" 
+       :class="{ active: isActive }"/>
        </span>
 
       </div>
@@ -37,6 +37,7 @@ export default {
      data() {
        return{
          hover: false,
+           isActive: false,
        }
   },//data
       /** props from parent FeedsList  */
@@ -52,15 +53,14 @@ export default {
   ...mapMutations(["FAVORITE_FEEDS"]),
    addFav(item) {
    this.FAVORITE_FEEDS(item);
+  this.isActive = true;
     
     }, 
   } //methods
 }
 </script>
  
-<style scoped>
-
-
+<style>
 .img__container {
   position: relative;
 }
@@ -105,12 +105,16 @@ cursor: pointer;
       text-transform: lowercase;
     }
 
-    .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.meta svg:hover,
+.active {
+  color:red;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
 </style>
 
  

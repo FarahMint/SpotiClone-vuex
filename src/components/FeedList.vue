@@ -20,9 +20,8 @@ import {mapGetters} from "vuex";
 import FeedItem from "./FeedItem";
 
 export default {
-      name:"FeedsList",
-    
-components:{ "feed-item": FeedItem   },  
+  name:"FeedsList",
+  components:{ "feed-item": FeedItem   },  
   computed:{
     ...mapGetters(["allFeeds"]),
   },
