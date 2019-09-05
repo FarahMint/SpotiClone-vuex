@@ -1,13 +1,11 @@
 <template>
   <div>
-
-<FeedList />
-  
+    <FeedList />
   </div>
 </template>
 
 <script>
-import FeedList from "./FeedList";
+import FeedList from "../components/FeedList";
 
 export default {
   name: 'Home', 
@@ -18,7 +16,7 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style>
  
 </style>

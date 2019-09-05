@@ -45,4 +45,8 @@ export default {
   position:relative;
 
 }
+
+  .selected svg{
+color: red;
+}
 </style>

@@ -7,7 +7,7 @@
       :feed="item"
       :key="item.id"
       @update-selection="toggle"
-      :class="{ selected: item.isSelected }"/> 
+        :class="{ selected: item.isSelected }"/> 
   </div>
          
   </section>
@@ -17,7 +17,7 @@
 
 import {mapGetters,  mapActions} from "vuex";
 
- import FeedItem from "./FeedItem";
+ import FeedItem from "../components/FeedItem";
  
 export default {
   name:"Playlist",
@@ -80,15 +80,5 @@ section {
 .img__container:hover img {
   opacity: 0.3;
 }
-
-.meta.selection svg{
-  color:red;
-}
-
-.meta.selection svg:hover{
-  color:inherit;
-}
-
- 
 
 </style>

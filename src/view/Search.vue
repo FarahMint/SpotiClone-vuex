@@ -14,7 +14,8 @@
       <feed-item 
          v-for="item in getFilteredFeed"
           :feed="item"
-          :key="item.id"/> 
+          :key="item.id"
+          @update-selection="toggle"/> 
     </div>
 
 </div>
@@ -24,13 +25,17 @@
 import {mapGetters,  mapState, mapActions } from "vuex";
 
 /** import component  */
-import FeedItem from "./FeedItem";
+import FeedItem from "../components/FeedItem";
 
 export default {
     name:"Search",
     methods:{
-     ...mapActions(['FILTERED_FEEDS']),
+     ...mapActions(['FILTERED_FEEDS', "TOGGLE_FAV"]),
+       toggle(index) {
+    this.TOGGLE_FAV(index);
+    }
   },
+   
   components:{ "feed-item": FeedItem }, 
  computed: {
    ...mapState( ["searchWord" ]),

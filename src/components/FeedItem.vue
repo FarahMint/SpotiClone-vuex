@@ -3,9 +3,11 @@
     
     <div>
       <div class="img__container" 
+     
       @mouseover="hover = true"
       @mouseleave="hover = false">
         <img 
+           v-on:click="goTodetail(feed.id)"
         v-bind:src="feed.image"
         v-bind:alt="feed.title">
 
@@ -20,7 +22,6 @@
 
       <ToggleFav 
        @button-clicked="toggleFav(feed.id)"/>
-      
        </span>
 
       </div>
@@ -29,7 +30,9 @@
 </template>
 
 <script>
+import { mapActions} from "vuex";
 
+/**btn component */
 import ToggleFav from "./ToggleFav";
 
 export default {
@@ -50,9 +53,16 @@ export default {
     },//props
   
      methods:{
+         ...mapActions(["TOGGLE_FAV", "FETCH_SINGLE_DATA" ]),
         toggleFav(item) {
         this.$emit('update-selection', item)
-      } 
+      },
+             /** go to details page of item targeted */
+       goTodetail(feedId) {
+      this.$router.push({name:'Feed', params:{id:feedId}});
+      this.FETCH_SINGLE_DATA();
+       }//goTodetail
+    
   } //methods
 }
 </script>
@@ -86,14 +96,6 @@ export default {
   opacity: 0.3;
 }
 
-.meta{
-      display: flex;
-    justify-content: space-evenly;
-}
-.meta span{
-cursor: pointer;
-}
-
     h3, p{
       font-size: 1rem;
       line-height: 20px;
@@ -102,10 +104,6 @@ cursor: pointer;
       text-transform: lowercase;
     }
 
-.meta svg:hover,
-.selected {
-  color:red;
-}
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }

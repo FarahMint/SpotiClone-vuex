@@ -21,19 +21,10 @@
                     <li class="badge">
                         <span  v-if="getFavoriteCount>0">  {{getFavoriteCount}}</span>
                       
-                     <router-link to="/yourplaylist">selection</router-link>
+                     <router-link to="/favorite">selection</router-link>
                 
                     </li>
-                    <!-- <li role="separator" class="divider"></li>
-                    <li class="alternate sidepanel-item-small ">
-                        <a href="/uk/signup/" id="nav-link-sign-up">Sign up</a>
-                    </li>
-
-                    <li class="alternate sidepanel-item-small">
-                        <a href="/uk/login/" id="header-login-link" class="user-link">
-                        <span class="user-text navbar-user-text">Log In</span>
-                        </a>
-                    </li> -->
+             
                 </ul>
             </nav>
         </div>
@@ -72,7 +63,7 @@ a{
     margin-bottom: 0;
     border: 1px solid transparent;
 
-    background-color: rgba(0,0,0);
+    background-color: rgb(0,0,0);
   
     border-color: #222326;
 
@@ -115,12 +106,12 @@ a{
 .badge span{
         position: absolute;
     right: 0;
-    top: -10px;
+    top: -6px;
     display: block;
     border-radius: 50%;
-    border: 1px solid red;
-    width: 25px;
-    height: 25px;
+    background-color:#fff;
+    width: 20px;
+    height: 20px;
 }
 
  

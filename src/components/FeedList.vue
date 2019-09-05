@@ -9,7 +9,8 @@
           :feed="item"
           :key="item.id"
          @update-selection="toggle"
-      :class="{ selected: item.isSelected }"/> 
+           :class="{ selected: item.isSelected }"
+     /> 
     </div>
   </div>
   </section>
@@ -31,16 +32,16 @@ export default {
         ...mapActions(["TOGGLE_FAV"]),
      toggle(index) {
       this.TOGGLE_FAV(index);
-    }
+    },
   }
 
 }
 </script>
 
- <style scoped> 
+ <style> 
  .list__container{
   padding-top: 2rem;
-  margin: 0 auto;
+     margin: 5rem auto;
   max-width: 1200px;
   width: 90%; 
  }/* end list container*/
@@ -58,7 +59,14 @@ export default {
   grid-gap: 1rem;
   }
 
-  .selected {
- border:2px solid red;
-}
+     /* screen with less than 768px*/
+    @media screen and (max-width: 768px) {
+      .list__display{
+      display:grid;
+      grid-template-columns:  repeat(2, 1fr);
+      grid-gap: 1rem;
+      }
+    }
+
+
 </style>

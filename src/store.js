@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import router from '@/router'
+//https://stackoverflow.com/questions/42178851/getting-router-params-into-vuex-actions
+
 import {formatAPI } from "./helper"
 
 
@@ -15,7 +18,7 @@ export default new Vuex.Store({
   state: {
     title:"Feed iMu",
     feeds:[],
-    course: {},
+    feed: {},
     searchWord: null,
     filteredFeeds: null,
     favoriteFeeds:favoriteFeeds ? JSON.parse(favoriteFeeds): [],
@@ -29,7 +32,7 @@ export default new Vuex.Store({
 // their values outside of the store module.
  getters :{
   allFeeds: (state) => state.feeds,
-  getCourse: (state) => state.course,
+  getFeed: (state) => state.feed,
   getSearchWord: (state) => state.searchWord,
   getFilteredFeed: (state) => state.filteredFeeds,
   getFavoriteFeed: (state) => state.favoriteFeeds,
@@ -42,9 +45,15 @@ export default new Vuex.Store({
    *  We use these to update the values of the store.
   */
   mutations: {
-    FETCH_DATA:(state, allFeeds)=>{
+    FETCH_DATA(state, allFeeds){
       state.feeds=allFeeds;
     },
+    FETCH_SINGLE_DATA(state){
+      state.feed = state.feeds.find(item => item.id === router.currentRoute.params.id);
+    },
+    FETCH_FEED_SELECTED(state, feed){
+    state.feed= feed;
+   }, //end  geet Feed
     FILTERED_FEEDS (state, word) {
       if (!(word) || word === '{}') {
           state.searchWord = null
@@ -116,6 +125,9 @@ export default new Vuex.Store({
           commit("IS_FEEDS_LOADING", false);
           commit("ERROR", err);
         }
+  },
+    FETCH_SINGLE_DATA({ commit }) {
+    commit('FETCH_SINGLE_DATA')
   },
   FILTERED_FEEDS({ commit }, word) {
     commit('FILTERED_FEEDS', word)
