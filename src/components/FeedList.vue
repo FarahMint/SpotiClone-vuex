@@ -7,24 +7,32 @@
       <feed-item 
           v-for="item in allFeeds"
           :feed="item"
-          :key="item.id"/> 
+          :key="item.id"
+         @update-selection="toggle"
+      :class="{ selected: item.isSelected }"/> 
     </div>
   </div>
   </section>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapGetters, mapActions} from "vuex";
+   
 
 /** import component  */
-import FeedItem from "./FeedItem";
+ import FeedItem from "./FeedItem";
 
 export default {
   name:"FeedsList",
-  components:{ "feed-item": FeedItem   },  
+ components:{ "feed-item": FeedItem   },  
   computed:{
     ...mapGetters(["allFeeds"]),
-  },
+  },methods:{
+        ...mapActions(["TOGGLE_FAV"]),
+     toggle(index) {
+      this.TOGGLE_FAV(index);
+    }
+  }
 
 }
 </script>
@@ -49,4 +57,8 @@ export default {
   grid-template-columns:  repeat(4, 1fr);
   grid-gap: 1rem;
   }
+
+  .selected {
+ border:2px solid red;
+}
 </style>

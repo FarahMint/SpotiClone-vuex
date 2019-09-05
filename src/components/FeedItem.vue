@@ -14,13 +14,13 @@
         </transition>
 
       </div>
-      <div class="meta">
+      <div class="meta" >
         <p>{{ feed.artist }}  </p>
        <span>
- 
-         <font-awesome-icon 
-       icon="heart" @click="addFav(feed)" 
-       :class="{ active: isActive }"/>
+
+      <ToggleFav 
+       @button-clicked="toggleFav(feed.id)"/>
+      
        </span>
 
       </div>
@@ -30,7 +30,7 @@
 
 <script>
 
-import { mapMutations} from "vuex";
+import ToggleFav from "./ToggleFav";
 
 export default {
     name:"feed-item",
@@ -40,6 +40,7 @@ export default {
            isActive: false,
        }
   },//data
+  components:{ToggleFav },
       /** props from parent FeedsList  */
     props:{
         feed:{
@@ -49,13 +50,9 @@ export default {
     },//props
   
      methods:{
-         /** go to details page of item targeted */
-  ...mapMutations(["FAVORITE_FEEDS"]),
-   addFav(item) {
-   this.FAVORITE_FEEDS(item);
-  this.isActive = true;
-    
-    }, 
+        toggleFav(item) {
+        this.$emit('update-selection', item)
+      } 
   } //methods
 }
 </script>
@@ -106,7 +103,7 @@ cursor: pointer;
     }
 
 .meta svg:hover,
-.active {
+.selected {
   color:red;
 }
   .fade-enter-active, .fade-leave-active {

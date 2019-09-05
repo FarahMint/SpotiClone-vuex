@@ -1,40 +1,36 @@
 <template>
   <section>
+      
   <h2 v-if="!getFavoriteFeed.length">No selection yet</h2>
-    <div class="list__display" >
-      <div v-for="item in getFavoriteFeed" :key="item.id">
-        <article> 
-            <div class="img__container">
-              <img v-bind:src="item.image" v-bind:alt="item.title">
-             <p>{{ item.title }}</p>
-            </div>
-            <div class="meta selection">
-              <p>{{ item.artist }}  </p>
-              <span>
-                <font-awesome-icon icon="heart" @click="removeFav(item)" />
-              </span>
-            </div>
-        </article> 
-      </div>
-    </div>
+  <div class="list__display">
+    <feed-item v-for="item in getFavoriteFeed"
+      :feed="item"
+      :key="item.id"
+      @update-selection="toggle"
+      :class="{ selected: item.isSelected }"/> 
+  </div>
+         
   </section>
 </template>
 
-<script>
+<script> 
 
 import {mapGetters,  mapActions} from "vuex";
+
+ import FeedItem from "./FeedItem";
  
 export default {
   name:"Playlist",
+  components:{FeedItem},
  
   computed:{
     ...mapGetters(["getFavoriteFeed"]),
   },
   methods: {
-   ...mapActions(["REMOVE_FROM_FAVORITE"]),
-    removeFav(item) {
-      this.REMOVE_FROM_FAVORITE(item);
-    },
+    ...mapActions(["TOGGLE_FAV"]),
+     toggle(index) {
+    this.TOGGLE_FAV(index);
+    }
   }
 }
 </script>
