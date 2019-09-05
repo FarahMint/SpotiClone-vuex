@@ -1,7 +1,8 @@
 # vuex-imu
 A web app created with vue.js, vuex for the state management and vue-router using the iTunes API. 
-I also leverage the local storage api to fake the back end and keep track of the user selection of album as favorite
+I also leverage the local storage api to fake the back end and keep track of the user selection of album as favorite.
 
+deployed with netlify [ https://spoticlone.netlify.com/](url)
 
 ## 🧐 What user can do?
 
