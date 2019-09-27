@@ -1,17 +1,17 @@
 <template>
     <div class="wrap">
-    <section>
         <div class="hero hero-home simplified">
-        <div class="hero-home-bg-cover"></div>
-        <div class="container container-simplified">
-            <div class="row row-simplified">
-            <h1>Music for everyone.</h1>
-            <h4>Most recent top chart</h4>
-                <router-link to="/featured"  role="button"  class="btn btn-green btn-simplified js-goto-signup js-button-hero-get-free"> GO SPOTICLONE FREE</router-link>
+
+            <div class="hero-home-bg-cover"></div>
+            
+                <div class="container container-simplified">
+                <div class="row row-simplified">
+                    <h1>Music for everyone.</h1>
+                    <h4>Most recent top chart</h4>
+                        <router-link to="/featured"  role="button"  class="btn btn-green btn-simplified js-goto-signup js-button-hero-get-free"> GO SPOTICLONE FREE</router-link>
+                </div>
             </div>
         </div>
-        </div>
-    </section>
     </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
 background-color: #F037A5;
 background: -webkit-gradient(linear, left top, left bottom, color-stop(-60%, #F037A5), color-stop(140%, #FAE62D));
 background: linear-gradient(#F037A5 -60%, #FAE62D 140%);
-    width: 100vw;
+    width: 100%;
 }
 /* CONTAINER */
 .container {
@@ -132,13 +132,7 @@ background: linear-gradient(#F037A5 -60%, #FAE62D 140%);
  
      /* screen with less than 768px*/
     @media screen and (max-width: 768px) {
-        section {
-            margin:  0;
-            padding: 0;
-        }
-        .container-simplified{
-            padding: 0;
-        }
+ 
         h1{
         font-size: 2rem;
         font-weight: 900;

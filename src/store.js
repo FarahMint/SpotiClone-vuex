@@ -53,6 +53,7 @@ export default new Vuex.Store({
     },
     FETCH_FEED_SELECTED(state, feed){
     state.feed= feed;
+    this.commit("SAVE_DATA");
    }, //end  geet Feed
     FILTERED_FEEDS (state, word) {
       if (!(word) || word === '{}') {
@@ -92,6 +93,7 @@ export default new Vuex.Store({
     ERROR: (state, message) => {
       state.appError = message
     },
+    
 
     SAVE_DATA:(state)=>{
   window.localStorage.setItem("selection", JSON.stringify(state.favoriteFeeds));

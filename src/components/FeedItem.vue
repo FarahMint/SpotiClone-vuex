@@ -17,7 +17,7 @@
 
       </div>
       <div class="meta" >
-        <p>{{ feed.artist }}  </p>
+        <p>{{shorten(feed.artist) }}</p>
        <span>
 
       <ToggleFav 
@@ -34,7 +34,6 @@ import { mapActions} from "vuex";
 
 /**btn component */
 import ToggleFav from "./ToggleFav";
-
 export default {
     name:"feed-item",
      data() {
@@ -61,7 +60,14 @@ export default {
        goTodetail(feedId) {
       this.$router.push({name:'Feed', params:{id:feedId}});
       this.FETCH_SINGLE_DATA();
-       }//goTodetail
+       },//goTodetail
+
+      // Shorten a string to less than maxLen characters without truncating words.
+      shorten(str,  separator = ' '){
+        let maxLen= 11;
+          if (!str || str.length <= maxLen) return str;
+          return str.substr(0, str.lastIndexOf(separator, maxLen));
+      },
     
   } //methods
 }

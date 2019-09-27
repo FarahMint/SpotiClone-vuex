@@ -1,15 +1,14 @@
 <template>
   <header class="navbar navbar-highlight-green navbar-fixed-top" role="banner">
-  <div class="container">
     <div class="navbar-header">
         <router-link to="/" class="navbar-brand">
           <span class="navbar-logo">SpotiClone</span>
         </router-link>
   
         </div>
-            <nav class="collapse navbar-collapse" id="navbar-nav" role="navigation">
+            <nav class="collapse" role="navigation">
         
-                <ul class="nav navbar-nav navbar-right nav-main">
+                <ul class="navbar-nav">
                     <li>
                      <router-link to="/featured">Home</router-link>
                        
@@ -22,12 +21,9 @@
                         <span  v-if="getFavoriteCount>0">  {{getFavoriteCount}}</span>
                       
                      <router-link to="/favorite">selection</router-link>
-                
                     </li>
-             
                 </ul>
             </nav>
-        </div>
     </header>
 </template>
 
@@ -45,16 +41,8 @@ export default {
 </script>
 
 <style scoped>
-
-ul{
-    margin:0;
-}
-
-li{
-    list-style-type: none;
-}
-a{
-    text-decoration:none;
+header{
+    display:flex;
 }
 
 .navbar {
@@ -62,14 +50,12 @@ a{
     min-height: 80px;
     margin-bottom: 0;
     border: 1px solid transparent;
-
-    background-color: rgb(0,0,0);
-  
-    border-color: #222326;
-
     display:flex;
     justify-content: space-around;
     align-items: center;
+
+    background-color: rgb(0,0,0);
+    border-color: #222326;
 }
 
 .navbar-highlight-green ,
@@ -83,14 +69,16 @@ a{
     position: fixed;
     right: 0;
     left: 0;
+    width:100%;
+    height:auto;
     z-index: 1030;
 }
  
- .container, nav ul{
-       display:flex;
+ nav ul{ 
+    display:flex;
     justify-content: space-around;
     align-items: center;
-        width: 100%;
+    width: 100%;
  }
 
 .nav >  li {
@@ -103,8 +91,12 @@ a{
     color:#fff;
 }
 
+.badge {
+        position: relative;
+ 
+}
 .badge span{
-        position: absolute;
+    position: absolute;
     right: 0;
     top: -6px;
     display: block;
@@ -114,5 +106,11 @@ a{
     height: 20px;
 }
 
+     /* screen with less than 768px*/
+    @media screen and (max-width: 360px) {
+      header{
+        flex-direction: column;
+      }
+    }
  
 </style>

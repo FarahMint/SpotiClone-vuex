@@ -2,7 +2,7 @@
   <section>
       
   <h2 v-if="!getFavoriteFeed.length">No selection yet</h2>
-  <div class="list__display">
+  <div class="list__fav">
     <feed-item v-for="item in getFavoriteFeed"
       :feed="item"
       :key="item.id"
@@ -38,14 +38,15 @@ export default {
 <style>
 
 section {
-  margin: 5rem 0;
-  padding: 2rem 1rem;
+    padding: 5rem 1rem;
+    margin-top: 80px;
 
 }
- .list__display{
-  display:grid;
-  grid-template-columns:  repeat(4, 1fr);
-  grid-gap: 1rem;
+ .list__fav{
+ display:flex;
+ flex-wrap: wrap;
+ justify-content: space-around;
+    
   }
 
 

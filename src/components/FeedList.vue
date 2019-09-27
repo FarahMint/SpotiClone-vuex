@@ -40,10 +40,7 @@ export default {
 
  <style> 
  .list__container{
-  padding-top: 2rem;
-     margin: 5rem auto;
-  max-width: 1200px;
-  width: 90%; 
+  width: 100%; 
  }/* end list container*/
 
    h1{
@@ -53,20 +50,13 @@ export default {
     margin: 1.25rem 0;
   }
 
-  .list__display{
-  display:grid;
-  grid-template-columns:  repeat(4, 1fr);
-  grid-gap: 1rem;
+   .list__display{
+ display:grid;
+grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-gap:1rem;
   }
 
-     /* screen with less than 768px*/
-    @media screen and (max-width: 768px) {
-      .list__display{
-      display:grid;
-      grid-template-columns:  repeat(2, 1fr);
-      grid-gap: 1rem;
-      }
-    }
+
 
 
 </style>

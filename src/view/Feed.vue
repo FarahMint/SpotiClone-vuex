@@ -1,6 +1,6 @@
 <template>
  
-<section class="playlist">
+<section>
   <div class="container__img">
     <img :src="getFeed.image || ''" :alt="getFeed.title" >
   </div>
@@ -37,17 +37,11 @@ export default {
 
 <style scoped>
 
-.playlist{
-    padding-top: 2rem;
-    padding-right: 2rem;
-    margin: 0 auto;
-    max-width: 1480px;
-
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-
- }/* end playlist */
+ section{
+   display:flex;
+   flex-wrap:wrap;
+   justify-content: space-around;
+ }
 
 a[role="button"]{
     border: 2px solid #da0f47;

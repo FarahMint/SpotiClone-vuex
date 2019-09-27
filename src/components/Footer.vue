@@ -1,11 +1,11 @@
 <template>
-    <div>
+ 
         <footer >
             <div class="bottom-links">
             <span>© 2019 FarahMint</span>
             </div>
         </footer>
-    </div>      
+         
 </template>
 
 <script>

@@ -22,7 +22,7 @@ export default new Router({
       {path:"/search", component:Search , name:"Search" },
       {path:"/favorite", component:Playlist, name:"Playlist"},
       {path:"/feed/:id", component:Feed, name: 'Feed'},
-      {path:"/**", component:NotFound},
+      {path:"/**/**", component:NotFound},
         
     ]
 })

@@ -1,5 +1,5 @@
 <template>
-<div class="list__container">
+<section>
 
    <input 
    type="search"
@@ -18,7 +18,7 @@
           @update-selection="toggle"/> 
     </div>
 
-</div>
+</section>
 </template>
 
 <script>
@@ -64,30 +64,4 @@ input::placeholder{
 font-size: 2rem;
 font-weight:900;
 }
- .list__container{
-  padding-top: 2rem;
-  margin: 0 auto;
-  max-width: 1200px;
-  width: 90%; 
-height:100vh;
- }/* end list container*/
-
-   h1{
-    font-size: 2rem;
-    line-height: 44px;
-    font-weight: 900;
-    margin: 1.25rem 0;
-  }
-
-h3{
-    margin-top:2rem; 
-}
-p{
-    margin-bottom:2rem; 
-}
-  .list__display{
-         display:grid;
-  grid-template-columns:  repeat(4, 1fr);
-  }
-
 </style>
