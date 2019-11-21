@@ -57,6 +57,9 @@ export default {
 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   grid-gap:1rem;
   }
+   .list__display article{
+    max-width:360px;
+  }
 
 
 
