@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import router from '@/router'
 //https://stackoverflow.com/questions/42178851/getting-router-params-into-vuex-actions
 
-import {formatAPI } from "./helper"
+ import {formatAPI } from "./helper"
 
 
 const baseURL =`https://itunes.apple.com/us/rss/topalbums/limit=100/json`;
@@ -28,10 +28,13 @@ export default new Vuex.Store({
     appError: null,
   },
 
+
   //// We need these to be able to access
 // their values outside of the store module.
+
+// formatAPI(state.feeds)
  getters :{
-  allFeeds: (state) => state.feeds,
+  allFeeds: (state) =>  state.feeds,
   getFeed: (state) => state.feed,
   getSearchWord: (state) => state.searchWord,
   getFilteredFeed: (state) => state.filteredFeeds,
@@ -114,19 +117,27 @@ export default new Vuex.Store({
   },
   actions: {
    async getFeeds({commit}){
+   
      commit("IS_FEEDS_LOADING", true)
      try{
        let response= await fetch(baseURL);
+      
        let {feed} = await response.json();
-       let feedList = feed.entry.map(item => formatAPI(item));
+       const {entry} = feed;
 
-       commit("IS_FEEDS_LOADING", false);
-      commit("FETCH_DATA", feedList);
+       let temp = formatAPI(entry);
+
+      commit("FETCH_DATA",  temp);
+      commit("IS_FEEDS_LOADING", false);
+         
+
          
         }catch(err){
           commit("IS_FEEDS_LOADING", false);
           commit("ERROR", err);
         }
+
+       
   },
     FETCH_SINGLE_DATA({ commit }) {
     commit('FETCH_SINGLE_DATA')

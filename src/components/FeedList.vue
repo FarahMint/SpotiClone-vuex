@@ -22,12 +22,14 @@ import {mapGetters, mapActions} from "vuex";
 
 /** import component  */
  import FeedItem from "./FeedItem";
-
+ 
+ 
 export default {
   name:"FeedsList",
  components:{ "feed-item": FeedItem   },  
   computed:{
     ...mapGetters(["allFeeds"]),
+  
   },methods:{
         ...mapActions(["TOGGLE_FAV"]),
      toggle(index) {
