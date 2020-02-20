@@ -1,15 +1,23 @@
 # vuex-imu
-A web app created with vue.js, vuex for the state management and vue-router using the iTunes API. 
-I also leverage the local storage api to fake the back end and keep track of the user selection of album as favorite.
+ A music recommendations web app built with Vue.js that fetches data from iTunes API with search functionality, and allows users to select and save an album they are interested in, leveraging the local storage API.
 
 deployed with netlify [ https://spoticlone.netlify.com/](url)
 
+## 🧐 Web stack:
+
+- Vue.js
+- Vuex for the state management
+- Vue-router
+- iTune API
+- Local Storage API
+
+
 ## 🧐 What user can do?
 
- 1.	Search for the top 100 song
- 2. Select one album and get more info
- 3. Select album as favorite
- 4. Remove album selected favorite
+ - [x] 	Search for the top 100 song
+ - [x]  Select one album and get more info
+ - [x]  Select album as favorite
+ - [x]  Remove album selected favorite
 
 ## 🧐 What still need to be done?
  1. working on the testing
